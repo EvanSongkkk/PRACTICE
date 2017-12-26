@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+void swap(int array[], int i1, int i2) {
+    int temp = array[i1];
+    array[i1] = array[i2];
+    array[i2] = temp;
+}
+void quickSort(int array[], int start, int end) {
+    if (start >= end) {
+        return;
+    }
+    int pivot = end;
+    int wall = start;
+    for (int i = start; i <= end; i++) {
+        if (array[i] < array[pivot]) {
+            swap(array, i, wall++);
+        }
+    }
+    swap(array, wall, pivot);
+    quickSort(array, start, wall - 1);
+    quickSort(array, wall + 1, end);
+}
+int main() {
+    int n = 0;
+    scanf("%d", &n);
+    int array[1000] = {0};
+    for (int i = 0; i < n; i++) {
+        int current = 0;
+        scanf("%d", &current);
+        array[i] = current;
+    }
+    quickSort(array, 0, n - 1);
+    for (int i = 0; i < n; i++) {
+        printf("%d ", array[i]);
+    }
+    return 0;
+}
