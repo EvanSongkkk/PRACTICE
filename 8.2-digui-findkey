@@ -1,0 +1,30 @@
+#include <stdio.h>
+int RecurBinarySearch(num[],int,int,int,int);
+int main(int argc, const char * argv[]) {
+    int n,i,key,be,mi,af,num[1000];
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+        scanf("%d ",&num[i]);
+    scanf("%d",&key);
+    be=0,af=n-1,mi=(be+af)/2;
+    printf("%d\n",RecurBinarySearch(num,key,be,mi,af));
+    return 0;
+}
+int RecurBinarySearch(int num[],int key,int be,int mi,int af){
+    int temp;
+    if(af<be)
+        return -1;
+    if(num[mi]==key)
+        return mi;
+    if(num[mi]<key)
+    {
+        be=mi+1;
+        mi=(be+af)/2;
+    }
+    if(num[mi]>key)
+    {
+        af=mi-1;
+        mi=(be+af)/2;
+    }
+     return RecurBinarySearch(num,key,be,mi,af);
+}
