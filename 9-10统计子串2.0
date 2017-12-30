@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+int judge(char *,char *);
+
+int main(int argc, const char * argv[]) {
+    char str1[100],str2[10],* ptr1,* ptr2;
+    int i,ii,time;
+    time=0;
+    ptr1=&str1; ptr2=&str2;
+    gets(str1);
+    gets(str2);
+    for(i=0;i<(strlen(str1)-strlen(str2));i++){
+        for(ii=0;ii<strlen(str2);ii++)
+            if(*(ptr1+i+ii)!=*(ptr2+ii))
+                break;
+        if(ii==strlen(str2))time++;
+    }
+    printf("%d",time);
+    return 0;
+    }
+
