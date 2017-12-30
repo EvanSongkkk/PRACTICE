@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    char i = getchar();
+    int count = 0;
+    while (i != '#') {
+        if (i == '(') {
+            count += 1;
+        } else if (i == ')') {
+            if (count) {
+                count -= 1;
+            } else {
+                printf("NO");
+                return 0;
+            }
+        }
+        i = getchar();
+    }
+    if (!count) {
+        printf("YES");
+    } else {
+        printf("NO");
+    }
+    return 0;
+}
