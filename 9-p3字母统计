@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main(int argc, const char * argv[]) {
+    char ch;
+    int num[52]={0};
+    int i;
+    while((ch=getchar())!='\n'){
+        if(ch>='A'&&ch<='Z')
+            num[ch-'A']++;
+        else if(ch>='a'&&ch<='z')
+            num[ch-'a'+26]++;
+    }
+    for(i=0;i<26;i++){
+        if(num[i]!=0)
+            printf("%c:%d\n",i+'A',num[i]);
+    }
+    for(i=26;i<52 ;i++){
+        if(num[i]!=0)
+            printf("%c:%d\n",i+'a'-26,num[i]);
+    }
+    getchar();
+    return 0;
+}
