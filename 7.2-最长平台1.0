@@ -1,0 +1,36 @@
+#include <stdio.h>
+void input(int[],int);
+int search(int[],int);
+int main(int argc, const char * argv[]) {
+    int n;
+    scanf("%d",&n);
+    int a[n];
+    
+    if(n<=1000&&n>0){
+    input(a,n);
+    printf("%d\n",search(a,n));
+    }
+    if(n==0)
+        printf("%d\n",0);
+    return 0;
+}
+void input(int a[],int n){
+    int i;
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+}
+int search(int a[],int n){
+    int len,max,i,b,c;
+    max=1;len=1;
+    for(i=1;i<n;i++){
+        b=a[i];c=a[i-1];
+        if(b==c){
+            len++;
+            if(len>max)
+                max=len;
+        }
+        else
+            len=1;
+    }
+    return max;
+}
