@@ -1,0 +1,10 @@
+#include <stdio.h>
+int king(int,int);
+int main(int argc, const char * argv[]) {
+    int n,m;
+    scanf("%d%d",&n,&m);
+    printf("%d",king(n,m)+1);
+}
+int king(int n,int m){
+    return n > 1 ? (king(n - 1, m) + m) % n : 0;
+}
