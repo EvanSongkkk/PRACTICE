@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(int argc, const char * argv[]) {
+    char str[100];
+    int i,len,voclen,max,start,ii;
+    max=voclen=0;
+    gets(str);
+    len=strlen(str);
+    for(i=0;i<=len;i++)
+    {
+        if(str[i]!=' ' && str[i]!='\0')     //以空格和结束决定是否计数
+            voclen++;
+        else
+        {
+            if(voclen>max)
+            {
+                max=voclen;start=i-max;
+            }
+            voclen=0;                       //遇到空格 不管是不是max 都要清零
+        }
+    }
+    for(ii=start;ii<max+start;ii++)
+        printf("%c",str[ii]);
+    printf("\n");
+    return 0;
+}
