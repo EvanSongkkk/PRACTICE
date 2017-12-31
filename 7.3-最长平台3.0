@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main() {
+    int n = 0;
+    scanf("%d", &n);
+    int carrier = 0;
+    int max = 0;
+    int count = 0;
+    for (int i = 0; i < n; i++) {       //输入同时比较 分类讨论
+        int k = 0;
+        scanf("%d", &k);
+        if (i == 0) {                  //第一个数
+            carrier = k;
+            count = 1;
+        } else { 
+            if (carrier == k) {         //相同  
+                count += 1; 
+            } else {
+                carrier = k;            //将carrier更新 调整max大小
+                max = max > count ? max : count;
+                count = 1;
+            }
+        }
+    }
+    if (count > 0) {                      //最后没有比较count和max 加上
+        max = max > count ? max : count;
+    }
+    printf("%d", max);
+    return 0;
+}
