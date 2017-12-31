@@ -1,0 +1,15 @@
+int main(int argc, const char * argv[]) {
+    char str[100];
+    gets(str);
+    int len,max,count;
+    max=count=0;
+    len=strlen(str);
+    for(int i=1;i<len;i++){
+        if(str[i]==str[i-1])
+            count++;
+        else
+            count=0;
+        max=(max<count)?count:max ;
+    }
+    printf("%d\n",max+1);
+}
