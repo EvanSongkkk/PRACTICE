@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(int argc, const char * argv[]) {
+    char * voc[1000];
+    char str[10000],* ptr;
+    int i=1;
+    gets(str);
+    ptr = &str;
+    voc[0]=&str;
+    while(*ptr != '\0'){
+        if(*ptr == ' '){
+            *ptr='\0';
+            voc[i]=ptr+1;       //注意
+            i++;
+        }
+        ptr++;
+    }
+    for(int ii=0;ii<i;ii++)
+        puts(voc[ii]);
+    
+    return 0;
+}
