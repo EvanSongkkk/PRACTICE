@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc, const char * argv[]) {
+    int tcase,num,height,qc;
+    scanf("%d",&tcase);
+    for(int tt=0;tt<tcase;tt++){          //t种情况
+       int * tree, * stand;
+       scanf("%d",&num);
+       tree=(int *)malloc(num*sizeof(int));
+       for(int i=0;i<num;i++)         //输入树木个数
+            scanf("%d",tree+i);
+       scanf("%d",&qc);
+       stand=(int *)malloc(qc*sizeof(int));
+       for(int ii=0;ii<qc;ii++)       //输入各工厂标准
+           scanf("%d",stand+ii);
+        
+       for(int ii=0;ii<qc;ii++){         //根据每个厂的标准 比较树木不合格个数
+           int bad=0;
+           for(int i=0;i<num;i++){
+               if(*(tree+i)<*(stand+ii))
+                   bad++;
+           }
+           printf("%d\n",bad);
+       }
+        free(tree);
+        free(stand);
+   }
+       return 0;
+}
