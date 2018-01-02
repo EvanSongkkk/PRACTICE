@@ -1,0 +1,27 @@
+#include<stdio.h>
+
+void delcharfun(char str[],char ch);
+ 
+int main()
+{
+	char	ch,str[110];
+	
+	scanf("%s",str);
+	getchar();
+	scanf("%c",&ch);
+	delcharfun(str,ch);
+	printf("%s\n",str);
+	return 0;	
+}
+
+
+void delcharfun(char str[],char ch)
+{
+	int i,j ;
+	for(i=0,j=0;str[i];i++)
+	{
+		if (str[i] == ch) j++ ;
+		else str[i-j] = str[i] ;
+	}
+	str[i-j] = '\0' ;
+}
