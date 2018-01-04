@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<stdlib.h>
+main()
+{
+   int n,len,i;
+   char * * ptr;
+   printf("请输入字符串个数:");
+   scanf("%d",&n);
+   printf("请输入字符串最大长度:");
+   scanf("%d",&len);
+   getchar();//读取回车符，否则系统会认为输入的第一个串会是空串 
+//动态申请指针数组
+   ptr = malloc(sizeof(char *) * n);
+   if (ptr == NULL)
+      printf("指针数组内存分配失败");
+   else{
+      for(i = 0; i <= n-1; i++){
+         ptr[i] = malloc(sizeof(char) * len);
+         if ( ptr[i]==NULL)
+            printf("第%d个字符串内存分配失败",i+1);
+         else {                     
+            printf("请输入第%d个字符串:\n",i+1);             
+            gets(ptr[i]); //读取字符串 
+         } 
+      }
+      printf("输入的字符串是:\n");
+      for(i = 0; i <= n-1; i++)
+         puts(ptr[i]); 
+      
+      //内存释放
+      for(i = 0; i <= n-1; i++)//先释放字符串的内存，再释放指针数组
+           free(ptr[i]);
+      free(ptr);
+      ptr = NULL;      
+   } 
+   
+   system("pause");
+   return 0;
+} 
