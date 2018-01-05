@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int **create(int n,int m);
+int main()
+{
+    int n,m,**ptr,i,ii;
+    scanf("%d%d",&n,&m);
+    ptr=create(n,m);
+    for(i=0;i<n;++i){
+        for(ii=0;ii<m;++ii){
+            scanf("%d",&ptr[i][ii]);
+            ptr[i][ii] *= -10 ;
+        }
+    }
+    for(i=0;i<n;i++){
+        for(ii=0;ii<m;++ii)
+            printf("%d ",ptr[i][ii]);
+        printf("\n");
+    }
+    for(i=0;i<n;++i)
+        free(ptr[i]);
+    free(ptr);
+    return 0;
+}
+int **create(int n,int m){
+    int i;
+    int **a=malloc(sizeof(int*)*n);
+    for(i=0;i<n;i++)
+        a[i]=malloc(sizeof(int)*m);
+    return a;
+}
