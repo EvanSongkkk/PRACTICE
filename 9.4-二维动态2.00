@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+int **Create2(int n, int m) {
+    int **pta = malloc(sizeof(int *) * n);      //给n个字符串开辟空间
+    for (int i = 0; i < n; ++i) {
+        *(pta + i) = malloc(sizeof(int) * m);     //给n个字符串的m个字符开辟空间
+    }
+    return pta;
+}
+
+void freePTA(int **pta, int n) {
+    for (int i = 0; i < n; ++i) {
+        free(*(pta + i));                    //先释放里层的
+    }
+    free(pta);                   //在释放外边的
+}
+
+int main() {
+    int n = 0;
+    int m = 0;
+    scanf("%d%d", &n, &m);
+    int **input = Create2(n, m);
+    for(int i = 0; i < n; ++i) {
+        for(int j = 0; j < m; ++j) {
+            scanf("%d", &input[i][j]);       //对于单个元素加&
+            input[i][j] *= -10;
+        }
+    }
+    for(int i = 0; i < n; ++i) {
+        for(int j = 0; j < m; ++j) {
+            printf("%d%s", input[i][j],j != m - 1 ? " " : "\n")；         //骚操作！
+        }
+    }
+    freePTA(input, n);
+    return 0;
+}
