@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    int num[21],i,ii,ji,s;
+    i=ji=0;
+    scanf("%d",&num[i]);
+    if(num[0]!=-1)   {               //输入
+        while(num[i]!= -1){
+            i++;
+            scanf("%d",&num[i]);
+        }
+        
+        for(ii=0;ii<i;ii++){   //       奇数放在前面 循环次数
+            for(s=0;s<i-ii;s++){      //两两对比冒泡
+                if(num[s]%2 ==0 && num[s+1]%2==1 ){
+                    int temp;
+                    temp=num[s];
+                    num[s]=num[s+1];
+                    num[s+1]=temp;
+                }
+            }
+        }
+        for(ii=0;ii<i;ii++){        //统计奇数个数
+            if(num[ii]%2!=0)
+                ji++;
+        }
+        for(ii=0;ii<(ji-1);ii++){         //奇数大小排序冒泡
+            for(s=0;s<i-ii-1;s++){                       // s<i-ii,num[s+1]%2!=0. 原来的！错了！！！
+                if(num[s]>num[s+1]){
+                    int t;
+                    t=num[s];
+                    num[s]=num[s+1];
+                    num[s+1]=t;
+                }
+            }
+        }
+        for(ii=0;ii<i-1;ii++)          //输出
+            printf("%d ",num[ii]);
+        printf("%d\n",num[ii]);
+    }
+    else
+        printf("\n");
+    system("pause");
+    return 0;
+}
