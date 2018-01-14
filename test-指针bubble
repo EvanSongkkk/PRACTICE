@@ -1,0 +1,29 @@
+#include <stdio.h>
+void bubble(int n,int *num);  //从小到大
+void swap(int *,int *);
+int main(int argc, const char * argv[]) {
+    int n,i,*ptr;
+    scanf("%d",&n);
+    ptr=(int *)malloc(sizeof(int)*n);
+    for(i=0;i<n;i++)
+        scanf("%d",ptr+i);
+    bubble(n,ptr);
+    for(i=0;i<n;i++)
+        printf("%d%c",*(ptr+i),(i==n-1)?'\n':' ');
+    return 0;
+}
+void bubble(int n,int* ptr){
+    int t,i;
+    for(t=0;t<(n-1);t++){
+        for(i=0;i<n-t-1;i++){
+            if(*(ptr+i)>*(ptr+i+1))
+                swap(ptr+i,ptr+i+1);
+        }
+    }
+}
+void swap(int *p1,int *p2){            //交换的是*ptr，不是地址！
+    int temp;                          //不能通过执行调用函数来改变实参指针变量(&x,&y)的值，但是可以改变实参指针变量所指变量的值！！！
+    temp=*p1;
+    *p1=*p2;
+    *p2=temp;
+}
