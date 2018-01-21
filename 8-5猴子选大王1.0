@@ -1,0 +1,32 @@
+#include <stdio.h>
+int king(int[],int,int);
+int main(int argc, const char * argv[]) {
+    int n,m,i;
+    scanf("%d%d",&n,&m);
+    int monkey[n];
+    for(i=1;i<=n;i++)
+        monkey[i]=0;
+    printf("the king: %d\n",king(monkey,n,m));
+    return 0;
+}
+int king(int monkey[],int n,int m){
+    int all=n; int i=1,mm=0;
+        while(all>1){                //循环条件
+            if(monkey[i]==0){ 
+                mm++;                //只计活着的
+                if(mm==m){           //满足死亡条件
+                    monkey[i]=1;
+                    all--;
+                    mm=0;
+                }
+            }
+            if(i==n)                 //序号循环
+                i=1;
+            else
+                i++;
+        }
+    for(i=1;i<=n;i++)                 //找到活着的
+        if(monkey[i]==0)
+            all=i;
+    return all;
+}
