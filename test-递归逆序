@@ -1,0 +1,28 @@
+#include <stdio.h>
+int count_p(int num);
+int reverse(int num,int p);
+int main(int argc, const char * argv[]) {
+    int num;
+    scanf("%d",&num);
+    int p=count_p(num);
+    printf("%d\n",reverse(num,p));
+    return 0;
+}
+int count_p(int num){
+    int p=1;
+    while(num/10 != 0){
+        p*=10;
+        num/=10;
+    }
+    return p ;
+}
+int reverse(int num,int p){
+    int first;
+    
+    if(num/10==0)               //比测试num==0少循环一次
+        return num;
+    else{
+        first=num/p;
+        return first+reverse(num-first*p,p/10)*10;
+    }
+}
