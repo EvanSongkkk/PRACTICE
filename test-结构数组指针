@@ -1,0 +1,47 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define MAX 20
+struct stu{
+    char name[MAX];
+    int score;
+};
+typedef struct stu Student;          //rules??
+void cmp(Student *ptr,int size);
+int main(int argc, const char * argv[]) {
+    Student info[5],*ptr;
+    ptr=&info[0];                //[0]?
+    int i,t;
+    for(i=0;i<5;i++){
+        scanf("%s",&info[i].name);
+        scanf("%d",&info[i].score);
+    }
+    cmp(ptr,5);
+ //   for(t=1;t<=4;t++){
+   //     for(i=0;i<5-t;i++){
+    //        if(strcmp((ptr+i)->name,(ptr+i+1)->name)>0){
+    //            Student temp;
+    //            temp=*(ptr+i);
+    //            *(ptr+i)=*(ptr+i+1);
+    //            *(ptr+i+1)=temp;
+    //        }
+    //    }
+   // }
+    for(i=0;i<5;i++){
+        printf("%s\t%d\n",(ptr+i)->name,(ptr+i)->score);
+    }
+    return 0;
+}
+void cmp(Student *ptr,int size){
+    Student temp;
+    int i,t;
+    for(t=1;t<=size-1;t++){
+        for(i=0;i<size-t;i++)
+            if(strcmp((ptr+i)->name,(ptr+i+1)->name)>0){
+                temp=*(ptr+i);
+                *(ptr+i)=*(ptr+i+1);
+                *(ptr+i+1)= temp;
+            }
+    }
+}
