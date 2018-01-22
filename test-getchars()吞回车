@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc, const char * argv[]) {
+    char **ptrstr;
+    int n,m,i;
+    scanf("%d%d",&n,&m);
+    getchar();                              //读取回车符，否则第一个串为空串
+    ptrstr=malloc(sizeof(char*)*n);
+    if(ptrstr!=NULL){
+        for(i=0;i<n;i++){
+            ptrstr[i]=(char*)malloc(sizeof(char)*m);
+            gets(ptrstr[i]);
+        }
+    }
+    for(i=0;i<n;i++)                         //输出
+        puts(ptrstr[i]);
+    for(i=0;i<n;i++)                         //释放
+        free(ptrstr[i]);
+    free(ptrstr);
+    return 0;
+}
+
