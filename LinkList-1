@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct link{
+    int num;
+    struct link * nextPtr;
+};
+typedef struct link LINKLIST;
+typedef struct link * LINKLISTPTR;
+void createLinklist(LINKLISTPTR* headPtr);
+void find_maxmin(LINKLISTPTR headPtr,int * max,int * min);
+int sum(LINKLISTPTR headPtr);
+void clearLinklist(LINKLISTPTR headptr);
+
+int main(int argc, const char * argv[]) {
+    LINKLISTPTR headPtr = NULL;
+    createLinklist(&headPtr);                  //别忘了&
+    int maxnum,minnum;
+    int * max = &maxnum;
+    int * min = &minnum;
+    find_maxmin(headPtr, max, min);
+    printf("The maximum, minimum and the total are: %d %d %d\n",maxnum,minnum,sum(headPtr));
+    return 0;
+}
+
+void createLinklist(LINKLISTPTR* headPtr){
+    printf("Please input a series of integers:");
+    LINKLISTPTR currentPtr,lastPtr;
+    int n;
+    scanf("%d",&n);
+    while( n != -1){
+      currentPtr = malloc(sizeof(LINKLIST));
+        if(currentPtr != NULL){
+        currentPtr -> num = n;
+        if(*headPtr == NULL){
+            *headPtr = currentPtr;
+            lastPtr = *headPtr;
+            (*headPtr) -> nextPtr = NULL;
+        }
+        else{
+            lastPtr -> nextPtr = currentPtr;
+            lastPtr = currentPtr;
+        }
+    }
+        scanf("%d",&n);
+    }
+    lastPtr -> nextPtr = NULL;
+}
+void find_maxmin(LINKLISTPTR headPtr,int * max,int * min){
+    *max = headPtr -> num;                                  //attention
+    *min = headPtr -> num;
+    LINKLISTPTR sPtr = headPtr -> nextPtr;
+    while(sPtr != NULL){
+        if(sPtr -> num > *max)
+            *max = sPtr -> num;
+        if(sPtr -> num < *min)
+            *min = sPtr -> num;
+        sPtr = sPtr ->nextPtr;
+    }
+}
+int sum(LINKLISTPTR headPtr){
+    int sum = 0;
+    LINKLISTPTR sPtr = headPtr;
+    while(sPtr != NULL){
+        sum += sPtr -> num;
+        sPtr = sPtr -> nextPtr;
+    }
+    return sum;
+}
+void clearLinklist(LINKLISTPTR headPtr){
+    LINKLISTPTR sPtr;
+    while(headPtr != NULL){
+        sPtr = headPtr;
+        headPtr = headPtr -> nextPtr;
+        free(sPtr);
+    }
+}
+
+
+
