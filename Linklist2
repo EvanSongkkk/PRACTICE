@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct link{
+    int num;
+    struct link * nextPtr;
+};
+typedef struct link LINKLIST;
+typedef struct link * LINKLISTPTR;
+LINKLISTPTR createLinklist();                         //创建有序链表
+void insert_node(LINKLISTPTR *headPtr,LINKLISTPTR *currentPtr);
+void clearLinklist(LINKLISTPTR headPtr);
+void printLinklist(LINKLISTPTR headPtr);
+
+int main(int argc, const char * argv[]) {
+    LINKLISTPTR headPtr;
+    headPtr = createLinklist();
+    printf("The bew list is:");
+    printLinklist(headPtr);
+    clearLinklist(headPtr);
+    return 0;
+}
+
+LINKLISTPTR createLinklist(){
+    printf("Please input a list(end by -1):");
+    LINKLISTPTR headPtr,currentPtr,lastPtr;    //头，插入,末尾
+    int n;
+    headPtr = NULL;
+    scanf("%d",&n);
+    while( n != -1){
+      currentPtr = malloc(sizeof(LINKLIST));
+        if(currentPtr != NULL){
+          currentPtr -> num = n;
+          if(headPtr == NULL){               //创建头节点
+             headPtr = currentPtr;
+             lastPtr = headPtr;
+             headPtr -> nextPtr = NULL;
+          }
+          else{                              //后续节点排序插入
+              LINKLISTPTR nextPtr,prePtr;
+              prePtr = NULL;
+              nextPtr = headPtr;
+              while(nextPtr != NULL && ((currentPtr -> num) > (nextPtr -> num))){      //找位置
+                  prePtr = nextPtr;
+                  nextPtr = nextPtr ->nextPtr;
+              }
+              if(prePtr == NULL){                                                      //按大小排序插入新节点
+                  currentPtr -> nextPtr = headPtr;
+                  headPtr = currentPtr;
+              }
+              else if(nextPtr == NULL){
+                  prePtr -> nextPtr = currentPtr;
+                  lastPtr = currentPtr;
+                  lastPtr -> nextPtr = NULL;
+              }
+              else{
+                  prePtr -> nextPtr = currentPtr;
+                  currentPtr -> nextPtr = nextPtr;
+              }
+          }
+    }
+        scanf("%d",&n);
+    }
+    return headPtr;
+}
+void printLinklist(LINKLISTPTR headPtr){
+    LINKLISTPTR sPtr;
+    sPtr = headPtr;
+    while(sPtr != NULL){
+        printf("%d ",sPtr->num);
+        sPtr = sPtr -> nextPtr ;
+    }
+}
+void clearLinklist(LINKLISTPTR headPtr){
+    LINKLISTPTR tempPtr;
+    while(headPtr != NULL){
+        tempPtr = headPtr;
+        headPtr = headPtr -> nextPtr;
+        free(tempPtr);
+    }
+}
