@@ -1,0 +1,94 @@
+//
+//  main.c
+//  10.26_DS
+//
+//  Created by 宋一 on 2018/10/26.
+//  Copyright © 2018年 宋一. All rights reserved.
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct link{              //结构定义
+    int num;
+    char info[3][10];
+    struct link* next;
+}LNode,*LinkList;
+
+LinkList create(int size);
+int delete(LinkList* l,int*);
+LinkList find(LinkList,int S);
+void print(LinkList,int size);
+
+LinkList create(int size){
+    LinkList head = malloc(sizeof(LNode));
+    head -> next = NULL;
+    LinkList t = head;                        //头节点建立
+    for(int i = 1;i <= size;i++){
+        LinkList p = malloc(sizeof(LNode));
+        scanf("%d",&(p->num));
+        for(int j = 0;j < 3;j++)
+            scanf("%s",p->info[j]);           //输入姓名、性别、年龄
+        p -> next =NULL;  t -> next = p;   t = p;
+    }
+    t -> next = head -> next;  head = head -> next;        //构成循环链表
+    return head;
+}
+
+void print(LinkList head,int size){
+    LinkList t = head;
+    for(int i = 0;i < size;i++){
+        printf("%d\t",t -> num);            //输出size个节点中的所有参数
+        for(int j = 0;j < 3;j++)
+            printf("%s\t",t -> info[j]);
+        t = t -> next;
+        printf("\n");
+    }
+}
+
+LinkList find(LinkList L,int S){            //找到第S个
+    LinkList temp = L;
+    for(int i = 1;i < S;i++){
+        temp = temp -> next;
+    }
+    return temp;
+}
+
+int delete(LinkList* l,int* size){         //删除节点
+    int e = (*l) -> num;
+    LinkList pre = find(*l,*size);
+    pre -> next = (*l) -> next;
+    (*l) = (*l) -> next;
+    --(*size);                       //修改size大小
+    return e;                         //返回删除节点的序号
+}
+
+int main(int argc, const char * argv[]) {
+    int size,i;
+    i = 1;
+    printf("输入人数：");
+    scanf("%d",&size);
+    if(size <= 50){                     //要求总数不超过50
+        LinkList Head = create(size);
+        print(Head,size);
+        int S,M,X;
+        printf("输入开始序号，间隔人数，剩余人数：");
+        scanf("%d %d %d",&S,&M,&X);
+        Head = find(Head,S);                //原Head更新
+        LinkList temp = Head;
+        while(size > X){        //可以
+            i++;
+            temp = temp -> next;
+            if(i == M){
+                printf("%d\t",delete(&temp,&size));    //temp指向下一个
+                i = 1;
+            }
+        }
+        printf("\n存活：\n");  print(temp,size);  printf("\n");   //打印存活的
+    }
+    else
+        printf("超员");
+    return 0;
+}
+
+
