@@ -1,0 +1,17 @@
+int pivotIndex(int* nums, int numsSize) {
+    int i = 0;
+    while(i < numsSize){
+        int suml=0,sumr=0;
+        for(int ii = 0;ii < i;ii++)
+            suml += nums[ii];
+        for(int ii = i+1;ii < numsSize;ii++)
+            sumr += nums[ii];
+        if(suml == sumr ) return i;
+        else if (i ==0 && sumr == 0) return 0;
+        else if (i == numsSize-1 && suml == 0) return i;
+        i++;
+    }
+    return -1;
+}
+
+
