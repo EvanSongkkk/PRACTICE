@@ -1,10 +1,11 @@
-//
-//  main.c
-//  11.6_sq
-//
-//  Created by 宋一 on 2018/11/6.
-//  Copyright © 2018年 宋一. All rights reserved.
-//
+/*
+1) ch = getchar;
+   gets(str);
+   用getchars()把多出的\n吞了
+2)字符输入最好加个结束条件
+3)case语句一定加break！！！
+4)main里面别瞎整return...
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,11 +75,4 @@ int main(int argc, const char * argv[]) {
         printf("%d\n",ERROR);
         return 0;
 }
-/*
-1) ch = getchar;
-   gets(str);
-   用getchars()把多出的\n吞了
-2)字符输入最好加个结束条件
-3)case语句一定加break！！！
-4)main里面别瞎整return...
-*/
+
