@@ -1,0 +1,84 @@
+//
+//  main.c
+//  11.6_sq
+//
+//  Created by 宋一 on 2018/11/6.
+//  Copyright © 2018年 宋一. All rights reserved.
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#define ERROR 0
+#define OK 1
+#define OVERFLOW -1
+typedef int Status;
+typedef struct{
+    char * base;
+    char * top;
+    int Size;
+}St;
+Status init(St*,int);
+Status add(St*,char);
+Status popp(St*);
+Status init(St* SS,int len){
+    (*SS).base = malloc(sizeof(char)*len);
+    if(!(*SS).base)    return ERROR;
+    (*SS).top = (*SS).base;
+    (*SS).Size = len;
+    return OK;
+}
+Status add(St * SS,char ch){
+    if((*SS).top - (*SS).base > (*SS).Size) //判满？？
+        return OVERFLOW;
+    else{
+        *((*SS).top)++ = ch;
+        return OK;
+    }
+}
+Status popp(St* SS){
+    if((*SS).top == (*SS).base)  return ERROR;
+    else{
+        (*SS).top--;
+        return OK;
+    }
+}
+int main(int argc, const char * argv[]) {
+    St S;
+    int len;
+    char ch;
+    scanf("%d",&len);
+    getchar();
+    if(init(&S,len)){
+        //scanf("%c",&ch);
+        ch = getchar();             
+        while(ch != '#'){             
+            switch(ch){
+                case ')':
+                    if((S.top != S.base) && *(S.top-1) == '(')  popp(&S);
+                    else break;
+                case ']':
+                    if((S.top != S.base) && *(S.top-1) == '[')  popp(&S);
+                    else break;
+                case '(':
+                    
+                case '[':
+                    add(&S,ch);   break;
+                        }
+           // scanf("%c",&ch);
+            ch = getchar();
+        }
+    }
+    if(S.top == S.base)
+        printf("%d\n",OK);
+    else
+        printf("%d\n",ERROR);
+        return 0;
+}
+/*
+1) ch = getchar;
+   gets(str);
+   用getchars()把多出的\n吞了
+2)字符输入最好加个结束条件
+3)case语句一定加break！！！
+4)main里面别瞎整return...
+*/
