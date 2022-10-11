@@ -1,5 +1,5 @@
 #include <stdio.h>
-void input(int[],int);
+
 int search(int[],int);
 int main(int argc, const char * argv[]) {
     int n;
